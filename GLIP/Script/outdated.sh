@@ -1,0 +1,441 @@
+
+
+# ###### grey
+# MODE="grey"
+# printf "\n\n #### $MODE \n\n" >> $OUTPUT
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display \
+#   TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE >> $OUTPUT
+# ===== OrderedDict([('bbox', OrderedDict([('AP', 0.42692479866609223), ('AP50', 0.5866331589371657), ('AP75', 0.4647041294047368), ('APs', 0.291580608724314), ('APm', 0.47053439162592153), ('APl', 0.5558822286434837)]))])
+
+
+# ###### SNOW 
+# MODE="snow"
+# printf "\n\n #### $MODE \n\n" >> $OUTPUT
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display \
+#   TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE >> $OUTPUT
+# # ===== OrderedDict([('bbox', OrderedDict([('AP', 0.38306816489884876), ('AP50', 0.5323813177160879), ('AP75', 0.41774137161016095), ('APs', 0.26857812262052916), ('APm', 0.4307310165546076), ('APl', 0.47790702790424)]))])
+
+
+# ###### Rain
+# MODE="rain"
+# printf "\n\n #### $MODE \n\n" >> $OUTPUT
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display \
+#   TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE >> $OUTPUT
+# # ===== OrderedDict([('bbox', OrderedDict([('AP', 0.36126624709472377), ('AP50', 0.5132176808906719), ('AP75', 0.3901144942235311), ('APs', 0.2571521417453267), ('APm', 0.40375541585156516), ('APl', 0.43789751444538544)]))])
+
+# ###### Rain  
+# OUTPUT=ucf_output/VANILLA_RAIN.txt
+# MODE="rain_model"
+# printf "\n\n #### $MODE \n\n" >> $OUTPUT
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display \
+#   TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE DATALOADER.NUM_WORKERS 0 >> $OUTPUT
+
+
+
+# ###### Motion Blur 
+# MODE="motion_blur"
+# printf "\n\n #### $MODE \n\n" >> $OUTPUT
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display \
+#   TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE >> $OUTPUT
+# # ===== OrderedDict([('bbox', OrderedDict([('AP', 0.40578669887284285), ('AP50', 0.5731336050810029), ('AP75', 0.43885002312532995), ('APs', 0.23414023127214936), ('APm', 0.45341456874829106), ('APl', 0.5680857325532433)]))])
+
+
+
+# ###### MUD (Spatter)
+# MODE="mud"
+# printf "\n\n #### $MODE \n\n" >> $OUTPUT
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display \
+#   TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE >> $OUTPUT
+# # ===== OrderedDict([('bbox', OrderedDict([('AP', 0.4173148565987903), ('AP50', 0.577884011351255), ('AP75', 0.45165944446764655), ('APs', 0.3003611623309668), ('APm', 0.46202853270418587), ('APl', 0.5201414217767152)]))])
+
+# ###### SNOW 
+# OUTPUT=ucf_output/VANILLA_SNOW.txt
+# MODE="snow_model"
+# printf "\n\n #### $MODE \n\n" >> $OUTPUT
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display \
+#   TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE DATALOADER.NUM_WORKERS 0 >> $OUTPUT
+
+# ###### Rain  
+# OUTPUT=ucf_output/VANILLA_RAIN-2.txt
+# MODE="rain_model2"
+# printf "\n\n #### $MODE \n\n" >> $OUTPUT
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display \
+#   TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE DATALOADER.NUM_WORKERS 0 >> $OUTPUT
+
+# ###### Fog Blur 
+# MODE="fog_model"
+# printf "\n\n #### $MODE \n\n" >> $OUTPUT
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display \
+#   TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE >> $OUTPUT
+
+
+
+
+
+# ####### Multiple loss CUMMULATIVE nosie 
+# EXP_NAME=Trial3_2
+# NORMAL_NOISES=(salt_pepper low-res focus_blur motion_blur2)
+# LOSS_MODE=$(IFS="*" ; echo "${NORMAL_NOISES[*]}")
+# TEST_NOISE=low-res 
+# echo $LOSS_MODE
+# DATALOADER=FlickrDataset_MULTI_SCALE_LRCAPT_MULTI_AUG
+
+# OUTPUT_NOISE=$OUTPUT-$EXP_NAME
+# DUMP_FOLDER=$ROOT_DUMP_FOLDER+$EXP_NAME/
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG \
+#     --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN --subset $SUBSET \
+#     SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+#     DATASETS.TRAIN_DATALOADER $DATALOADER DATASETS.TEST_DATALOADER $TEST_DATALOADER DATASETS.DATALOADER_MODE $LOSS_MODE \
+#     MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE MODEL.RPN_ARCHITECTURE $HEAD DATASETS.TEST_NOISE $TEST_NOISE \
+#     DATASETS.N_LR 1 >> $OUTPUT_NOISE
+    
+
+
+
+# ###### COCO + Dump (HD)
+# TECHNIQUE=GeneralizedVLRCNN_TRILANG_DUMP 
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display --DUMP \
+#   TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP \
+#   MODEL.META_ARCHITECTURE $TECHNIQUE TEST.PREDICT False
+
+
+# ###################### Noise  - 1 (Dump)
+# TECHNIQUE=GeneralizedVLRCNN_TRILANG_DUMP 
+# DATALOADER=COCODataset_Perturb
+# NOISES=("pixel_dropout" "iso_blur" "salt_pepper" "low-res" "focus_blur" "jpg_compression" "chromatic" "motion_blur2" "fog" "low-res2")
+# for MODE in "${NOISES[@]}"
+# do
+#   CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display --DUMP \
+#     TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE \
+#     MODEL.META_ARCHITECTURE $TECHNIQUE TEST.PREDICT False
+# done
+
+
+###################### LR (Sev 5) (Dump)
+TECHNIQUE=GeneralizedVLRCNN_TRILANG_DUMP 
+DATALOADER=COCODataset_Perturb
+MODE="low-res3" 
+CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display --DUMP \
+    TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE \
+    MODEL.META_ARCHITECTURE $TECHNIQUE TEST.PREDICT True 
+
+
+# ###################### Noise  - 2 (Dump)
+# TECHNIQUE=GeneralizedVLRCNN_TRILANG_DUMP 
+# DATALOADER=COCODataset_Perturb
+# NOISES=("rain_model2" "snow_model2" "atmospheric")
+# for MODE in "${NOISES[@]}"
+# do
+#   CUDA_VISIBLE_DEVICES=1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display --DUMP \
+#     --spawn-method TEST.IMS_PER_BATCH $NUM_GPU MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False OUTPUT_DIR TEMP  DATASETS.DATALOADER $DATALOADER DATASETS.DATALOADER_MODE $MODE \
+#     MODEL.META_ARCHITECTURE $TECHNIQUE TEST.PREDICT False
+# done
+
+# ####### Re-evalaute Predictions BDDK (saved tensors)
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nproc_per_node=$NUM_GPU --master_port=$PORT tools/test_grounding_net.py --config-file $CONFIG --weight $WT --no-display \
+#   --re-validate OUTPUT_DIR TEMP SOLVER.IMS_PER_BATCH 1 TEST.IMS_PER_BATCH $NUM_GPU \
+#   DATASETS.TEST '("bdd100k_val",)' MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ####### Only Fusion Network & Frozen vanilla backbone
+# BACKBONE_TYPE=VANIL
+# BATCHSIZE=3
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-Fuse-$SUFFIX
+# OUTPUT_NOISE=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# rm -rf $DUMP_FOLDER
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+#     --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+#     SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+#     DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#     MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE \
+#     MODEL.E2E_MODE 'rpn_dyhead_tower' MODEL.E2E True >> $OUTPUT_NOISE.txt
+
+
+# ## WORKS :: Starting the evaluations at 4700
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX-L2
+# OUTPUT_NOISE=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True \
+#   MODEL.DYHEAD.NUM_CLASSES 10 MODEL.DYHEAD.FUSE_CONFIG.USE_CLASSIFICATION_LOSS True >> $OUTPUT_NOISE.txt
+
+
+
+
+
+# ####### WORKS :: Starting the evaluations at 4700
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX-FT
+# OUTPUT_NOISE=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True \
+#   SOLVER.WEIGHT_DECAY 0.05 DATASETS.SHUFFLE_SEED 3 SOLVER.STEP_PATIENCE 3 SOLVER.AUTO_TERMINATE_PATIENCE 8 SOLVER.MODEL_EMA 0.0 SOLVER.TUNING_HIGHLEVEL_OVERRIDE full DATASETS.USE_CAPTION_PROMPT True >> $OUTPUT_NOISE.txt
+
+
+# ####### WORKS :: Starting the evaluations at 4700
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX-L2
+# OUTPUT_NOISE=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True \
+#   MODEL.DYHEAD.NUM_CLASSES 4 MODEL.DYHEAD.FUSE_CONFIG.USE_CLASSIFICATION_LOSS True >> $OUTPUT_NOISE.txt
+
+
+# ####### WORKS :: Starting the evaluations at 5150
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX-L3
+# OUTPUT_NOISE=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG \
+#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True \
+#   MODEL.DYHEAD.FUSE_CONFIG.USE_SHALLOW_CONTRASTIVE_LOSS True MODEL.DYHEAD.FUSE_CONFIG.USE_TOKEN_LOSS True  >> $OUTPUT_NOISE.txt 
+  
+  
+
+
+
+###### Cross exchange layers 
+# BACKBONE_TYPE=NN
+# BATCHSIZE=3
+
+# BACKBONE_TYPE=NN+LR_TKO
+# BATCHSIZE=3
+
+# BACKBONE_TYPE=NN+Norm
+# BATCHSIZE=3
+
+# BACKBONE_TYPE=NN+Norm+LR_TKO
+# BATCHSIZE=3
+
+# # linear non-local 
+# BACKBONE_TYPE=NN+Lin
+# BATCHSIZE=3
+
+# BACKBONE_TYPE=NN+Lin+Norm
+# BATCHSIZE=3
+
+# BACKBONE_TYPE=NN+Lin+Norm+LR_TKO
+# BATCHSIZE=3
+
+# BACKBONE_TYPE=NN+Lin+LR_TKO
+# BATCHSIZE=3
+
+# BACKBONE_TYPE=NN+MHSA
+# BATCHSIZE=2
+
+# BACKBONE_TYPE=NN+MHSA+LR_TKO
+# BATCHSIZE=2
+
+
+#### Baseline entire Kitty FAN - training 
+# BATCHSIZE=10
+# BATCHSIZE=5
+###### Only channel attention Train 
+# BACKBONE_TYPE=FAN
+###### Entire MLP + Channel Attention 
+# BACKBONE_TYPE=FAN_MLP
+##### Entire Network E2E 
+# BACKBONE_TYPE=FAN_E2E
+
+###### Baseline entire Kitty Registers Extra Class tokens / Registers 
+# BACKBONE_TYPE=REGISTER
+# BATCHSIZE=15
+
+
+
+
+
+
+
+
+# ##############################################################################################################################
+# ############################################# Baseline (E2E) Training 
+# BACKBONE_TYPE=LORA
+# BATCHSIZE=10
+
+
+# #### E2E - 1 (All parts except backbone)
+# SUFFIX=VK-E2E-1
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+
+# OUTPUT=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# rm -rf $DUMP_FOLDER
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+#   --override_output_dir $DUMP_FOLDER  --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.BACKBONE.FREEZE_CONV_BODY_AT -1 SOLVER.USE_AMP True SOLVER.MAX_EPOCH 24 SOLVER.BASE_LR 0.00001 SOLVER.LANG_LR 0.00001 SOLVER.STEPS \(0.67,0.89\) DATASETS.DISABLE_SHUFFLE True \
+#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE MODEL.E2E True >> $OUTPUT.txt
+  
+
+  
+# ##### E2E - 1 + Trainable backbone  :: Everything 
+# SUFFIX=VK-E2E-2
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+
+# OUTPUT=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# rm -rf $DUMP_FOLDER
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+#   --override_output_dir $DUMP_FOLDER  --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.BACKBONE.FREEZE_CONV_BODY_AT -1 SOLVER.USE_AMP True SOLVER.MAX_EPOCH 24 SOLVER.BASE_LR 0.00001 SOLVER.LANG_LR 0.00001 SOLVER.STEPS \(0.67,0.89\) DATASETS.DISABLE_SHUFFLE True \
+#   MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE MODEL.E2E True MODEL.BACKBONE_E2E True >> $OUTPUT.txt
+  
+
+# ##### E2E - L3 (no backbone)
+# SUFFIX=VK-E2E-L3
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+
+# OUTPUT=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# rm -rf $DUMP_FOLDER
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+#   --override_output_dir $DUMP_FOLDER  --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.BACKBONE.FREEZE_CONV_BODY_AT -1 SOLVER.USE_AMP True SOLVER.MAX_EPOCH 24 \
+#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE MODEL.E2E True \
+#   MODEL.DYHEAD.FUSE_CONFIG.USE_SHALLOW_CONTRASTIVE_LOSS True MODEL.DYHEAD.FUSE_CONFIG.USE_TOKEN_LOSS True  >> $OUTPUT.txt
+# DATALOADER.NUM_WORKERS 2   
+
+
+
+# ##### E2E - L3 (everything including backbone)
+# SUFFIX=VK-E2E-L3-2
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+
+# OUTPUT=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# rm -rf $DUMP_FOLDER
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+#   --override_output_dir $DUMP_FOLDER  --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT MODEL.DYHEAD.SCORE_AGG "MEAN" TEST.EVAL_TASK detection MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.BACKBONE.FREEZE_CONV_BODY_AT -1 SOLVER.USE_AMP True SOLVER.MAX_EPOCH 24 \
+#   MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE MODEL.E2E True MODEL.BACKBONE_E2E True \
+#   MODEL.DYHEAD.FUSE_CONFIG.USE_SHALLOW_CONTRASTIVE_LOSS True MODEL.DYHEAD.FUSE_CONFIG.USE_TOKEN_LOSS True  >> $OUTPUT.txt
+# # DATALOADER.NUM_WORKERS 2   
+
+
+
+##### Fine-tuning (not backbone)
+# SUFFIX=VK-E2E-FT
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+
+# OUTPUT=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# rm -rf $DUMP_FOLDER
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/finetune_proposed.py --config-file $CONFIG --no-display \
+#   --override_output_dir $DUMP_FOLDER  --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT SOLVER.USE_AMP True \
+#   TEST.EVAL_TASK detection SOLVER.USE_AUTOSTEP True SOLVER.SEED 10 DATASETS.SHUFFLE_SEED 3 DATASETS.DISABLE_SHUFFLE True \
+#   MODEL.BACKBONE.FREEZE_CONV_BODY_AT 2 MODEL.DYHEAD.USE_CHECKPOINT True \
+#   SOLVER.WEIGHT_DECAY 0.05 DATASETS.USE_CAPTION_PROMPT True SOLVER.STEP_PATIENCE 3 SOLVER.CHECKPOINT_PER_EPOCH 1.0 SOLVER.AUTO_TERMINATE_PATIENCE 8 SOLVER.MODEL_EMA 0.0 SOLVER.TUNING_HIGHLEVEL_OVERRIDE full \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE MODEL.E2E True MODEL.BACKBONE_E2E True >> $OUTPUT.txt  
+# DATALOADER.NUM_WORKERS 2   
+     
+
+# ##### Fine-tuning (inlcuding backbone)
+# SUFFIX=VK-E2E-FT-2
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+
+# OUTPUT=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# rm -rf $DUMP_FOLDER
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/finetune_proposed.py --config-file $CONFIG --no-display \
+#   --override_output_dir $DUMP_FOLDER  --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT SOLVER.USE_AMP True \
+#   TEST.EVAL_TASK detection SOLVER.USE_AUTOSTEP True SOLVER.SEED 10 DATASETS.SHUFFLE_SEED 3 DATASETS.DISABLE_SHUFFLE True \
+#   MODEL.BACKBONE.FREEZE_CONV_BODY_AT 2 MODEL.DYHEAD.USE_CHECKPOINT True \
+#   SOLVER.WEIGHT_DECAY 0.05 DATASETS.USE_CAPTION_PROMPT True SOLVER.STEP_PATIENCE 3 SOLVER.CHECKPOINT_PER_EPOCH 1.0 SOLVER.AUTO_TERMINATE_PATIENCE 8 SOLVER.MODEL_EMA 0.0 SOLVER.TUNING_HIGHLEVEL_OVERRIDE full \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE MODEL.E2E True MODEL.BACKBONE_E2E True >> $OUTPUT.txt
+  
+
+##### Fine-tuning (not backbone)
+# SUFFIX=VK-E2E-FT-3
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+
+# OUTPUT=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# rm -rf $DUMP_FOLDER
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/finetune_proposed.py --config-file $CONFIG --no-display \
+#   --override_output_dir $DUMP_FOLDER  --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT SOLVER.USE_AMP True \
+#   SOLVER.WEIGHT_DECAY 0.05 TEST.EVAL_TASK detection MODEL.BACKBONE.FREEZE_CONV_BODY_AT 2 MODEL.DYHEAD.USE_CHECKPOINT True SOLVER.USE_AUTOSTEP True \
+#   SOLVER.SEED 10 DATASETS.SHUFFLE_SEED 3 DATASETS.USE_CAPTION_PROMPT True DATASETS.DISABLE_SHUFFLE True \
+#   SOLVER.STEP_PATIENCE 3 SOLVER.CHECKPOINT_PER_EPOCH 1.0 SOLVER.AUTO_TERMINATE_PATIENCE 8 SOLVER.MODEL_EMA 0.0 SOLVER.TUNING_HIGHLEVEL_OVERRIDE full \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE MODEL.E2E True MODEL.BACKBONE_E2E True >> $OUTPUT.txt  
+
+
+##### Fine-tuning (not backbone)
+# SUFFIX=VK-E2E-FT-4
+# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+
+# OUTPUT=ucf_output/$NAME
+# DUMP_FOLDER=EXPS/$NAME
+# rm -rf $DUMP_FOLDER
+# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT.txt
+# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/finetune_proposed.py --config-file $CONFIG --no-display \
+#   --override_output_dir $DUMP_FOLDER  --train_fn=$TRAIN_FN \
+#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT SOLVER.USE_AMP True \
+#   SOLVER.WEIGHT_DECAY 0.25 TEST.EVAL_TASK detection MODEL.BACKBONE.FREEZE_CONV_BODY_AT 2 MODEL.DYHEAD.USE_CHECKPOINT True SOLVER.USE_AUTOSTEP True SOLVER.BASE_LR 0.05 \
+#   SOLVER.SEED 10 DATASETS.SHUFFLE_SEED 3 DATASETS.USE_CAPTION_PROMPT True DATASETS.DISABLE_SHUFFLE True \
+#   SOLVER.STEP_PATIENCE 3 SOLVER.CHECKPOINT_PER_EPOCH 1.0 SOLVER.AUTO_TERMINATE_PATIENCE 8 SOLVER.MODEL_EMA 0.0 SOLVER.TUNING_HIGHLEVEL_OVERRIDE language_prompt_v2 \
+#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE MODEL.E2E True MODEL.BACKBONE_E2E True >> $OUTPUT.txt  
+# DATALOADER.NUM_WORKERS 2   
+
+
+
+# DATASETS.USE_CAPTION_PROMPT True ## Doesnt really do anything :: (no "cfg.DATASETS.CAPTION_PROMPT")
+# SOLVER.TUNING_HIGHLEVEL_OVERRIDE full # Trains all components
+# SOLVER.TUNING_HIGHLEVEL_OVERRIDE language_prompt_v2 # Free language backbone
+# DATASETS.DISABLE_SHUFFLE True 
+
+# DATASETS.TRAIN '("wedge_debug-grounding", )' DATASETS.TEST '("wedge_debug",)'  
+# DATASETS.TRAIN '("wedge_train-grounding", )'
+# DATASETS.TRAIN '("coco_grounding_train", )' 
+
+    
+
