@@ -1,4 +1,13 @@
 # 🚀 RobustOnion (ECCV-26 🎉)<br> [webpage](https://ucf-crcv.github.io/RobustOnion/) | [paper]() | [Individual results](MetaData/Results/) | [WAR-SAR Ranking](MetaData/WAR_SAR_Ranking)  
+
+### Setup 
+- [Setup](SETUP.md) instructions for all models, dataset noises (augmentation)
+- [Setup](SETUP.md) instructions for settig up new datasets (converting arbitrary dataset into coco annotations) and adding it to the model. 
+- [Benchmark](Benchmark/) Benchmark csvs used in the paper.
+
+
+
+
 ### Model Code for RobustOnion (NN+TK0)
 
 ** CODE UPLOAD COMING SOON (Before Conference in Sept) ** 
