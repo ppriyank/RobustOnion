@@ -76,6 +76,20 @@ python -m pip install fairscale termcolor
 python -m pip install transformers==4.39.3 
 ```
 
+Download weights 
+
+```
+MMGDINO/WTS/grounding_dino_swin-b_pretrain_all-f9818a7c.pth
+MMGDINO/WTS/grounding_dino_swin-b_pretrain_obj365_goldg_v3de-f83eef00.pth
+MMGDINO/WTS/grounding_dino_swin-l_pretrain_all-56d69e78.pth
+MMGDINO/WTS/grounding_dino_swin-l_pretrain_obj365_goldg-34dcdc53.pth
+MMGDINO/WTS/grounding_dino_swin-t_pretrain_obj365_goldg_20231122_132602-4ea751ce.pth
+MMGDINO/WTS/grounding_dino_swin-t_pretrain_obj365_goldg_grit9m_20231128_200818-169cc352.pth
+MMGDINO/WTS/grounding_dino_swin-t_pretrain_obj365_goldg_grit9m_v3det_20231204_095047-b448804b.pth
+MMGDINO/WTS/grounding_dino_swin-t_pretrain_obj365_goldg_v3det_20231218_095741-e316e297.pth
+MMGDINO/WTS/groundingdino_swint_ogc_mmdet-822d7e9d.pth
+```
+
 
 ### GLEE
 Taken from https://github.com/FoundationVision/GLEE.git

@@ -1,0 +1,7 @@
+
+outputs/*
+work_dirs*/*
+ucf_output_newton/*
+
+*DUMP*
+logs/
