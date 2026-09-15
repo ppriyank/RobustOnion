@@ -112,9 +112,6 @@ TECHNIQUE=GeneralizedVLRCNN_PROPOSE
 # NUM_CLASSES=4
 # echo "External dataset ..... "
 
-# rsync -r /data/priyank/synthetic/VisDrone2019-DET-val ucf0:/home/c3-0/datasets/
-# rsync -a /data/priyank/synthetic/UAVDT/images.zip ucf0:/home/c3-0/datasets/UAVDT/
-# rsync -r /data/priyank/synthetic/UAVDT/labels_coco ucf0:/home/c3-0/datasets/UAVDT/
 
 
 # ##############################################################################################################################
@@ -122,99 +119,89 @@ TECHNIQUE=GeneralizedVLRCNN_PROPOSE
 
 
 
-# ########################################## E2E  (no backbone)
-# BACKBONE_TYPE=VANIL-E2E
-# BATCHSIZE=3
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
-# OUTPUT_NOISE=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
-#     --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
-#     SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#     DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
-#     MODEL.NO_NORM True >> $OUTPUT_NOISE.txt
+########################################## E2E  (no backbone)
+BACKBONE_TYPE=VANIL-E2E
+BATCHSIZE=3
+NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+OUTPUT_NOISE=ucf_output/$NAME
+DUMP_FOLDER=EXPS/$NAME
+rm -rf $DUMP_FOLDER
+printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+    --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+    SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+    DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+    MODEL.NO_NORM True >> $OUTPUT_NOISE.txt
 
-# ############ E2E  (no backbone) Starting the evaluations at 4700
-# BACKBONE_TYPE=VANIL-E2E
-# BATCHSIZE=3
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX-L2
-# OUTPUT_NOISE=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
-#     --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
-#     SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#     DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
-#     MODEL.NO_NORM True SOLVER.USE_AMP True \
-#     MODEL.DYHEAD.NUM_CLASSES 10 MODEL.DYHEAD.FUSE_CONFIG.USE_CLASSIFICATION_LOSS True >> $OUTPUT_NOISE.txt
+
+############ E2E  (no backbone) Starting the evaluations at 4700
+BACKBONE_TYPE=VANIL-E2E
+BATCHSIZE=3
+NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX-L2
+OUTPUT_NOISE=ucf_output/$NAME
+DUMP_FOLDER=EXPS/$NAME
+rm -rf $DUMP_FOLDER
+printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+    --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+    SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+    DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+    MODEL.NO_NORM True SOLVER.USE_AMP True \
+    MODEL.DYHEAD.NUM_CLASSES 10 MODEL.DYHEAD.FUSE_CONFIG.USE_CLASSIFICATION_LOSS True >> $OUTPUT_NOISE.txt
     
 
-# ############# E2E  (no backbone) + LR noise 
-# TRAIN_FN=multi_scale_train
-# DATALOADER=FlickrDataset_MULTI_SCALE
-# TEST_DATALOADER=COCODataset_Perturb
-# TECHNIQUE=GeneralizedVLRCNN_PROPOSE
-# SUBSET=subset3
+############# E2E  (no backbone) + LR noise 
+TRAIN_FN=multi_scale_train
+DATALOADER=FlickrDataset_MULTI_SCALE
+TEST_DATALOADER=COCODataset_Perturb
+TECHNIQUE=GeneralizedVLRCNN_PROPOSE
+SUBSET=subset3
 
-# BACKBONE_TYPE=VANIL-E2E
-# BATCHSIZE=3
-# LOSS_MODE="low-res"
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX-$LOSS_MODE
-# OUTPUT_NOISE=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-# printf "\n\n #### $SUFFIX $LOSS_MODE \n\n" >> $OUTPUT_NOISE.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG \
-#     --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN --subset $SUBSET  \
-#     SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#     DATASETS.TRAIN_DATALOADER $DATALOADER DATASETS.TEST_DATALOADER $TEST_DATALOADER DATASETS.DATALOADER_MODE $LOSS_MODE \
-#     MODEL.NO_NORM True SOLVER.USE_AMP True >> $OUTPUT_NOISE.txt
-
-
+BACKBONE_TYPE=VANIL-E2E
+BATCHSIZE=3
+LOSS_MODE="low-res"
+NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX-$LOSS_MODE
+OUTPUT_NOISE=ucf_output/$NAME
+DUMP_FOLDER=EXPS/$NAME
+rm -rf $DUMP_FOLDER
+printf "\n\n #### $SUFFIX $LOSS_MODE \n\n" >> $OUTPUT_NOISE.txt
+CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG \
+    --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN --subset $SUBSET  \
+    SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+    DATASETS.TRAIN_DATALOADER $DATALOADER DATASETS.TEST_DATALOADER $TEST_DATALOADER DATASETS.DATALOADER_MODE $LOSS_MODE \
+    MODEL.NO_NORM True SOLVER.USE_AMP True >> $OUTPUT_NOISE.txt
 
 
+############# Fusion (no backbone) Starting the evaluations at 4700
+BACKBONE_TYPE=VANIL
+BATCHSIZE=3
+NAME=$MODEL_TYPE-$BACKBONE_TYPE-Fuse-$SUFFIX-L2
+OUTPUT_NOISE=ucf_output/$NAME
+DUMP_FOLDER=EXPS/$NAME
+printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+  --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+  SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+  DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+  MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True \
+  MODEL.E2E_MODE 'rpn_dyhead_tower' MODEL.E2E True \
+  MODEL.DYHEAD.NUM_CLASSES 10 MODEL.DYHEAD.FUSE_CONFIG.USE_CLASSIFICATION_LOSS True >> $OUTPUT_NOISE.txt
 
 
-    
-    
-    
-
-
-
-
-# ############# Fusion (no backbone) Starting the evaluations at 4700
-# BACKBONE_TYPE=VANIL
-# BATCHSIZE=3
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-Fuse-$SUFFIX-L2
-# OUTPUT_NOISE=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
-#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
-#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
-#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True \
-#   MODEL.E2E_MODE 'rpn_dyhead_tower' MODEL.E2E True \
-#   MODEL.DYHEAD.NUM_CLASSES 10 MODEL.DYHEAD.FUSE_CONFIG.USE_CLASSIFICATION_LOSS True >> $OUTPUT_NOISE.txt
-
-
-# ############# Only Fusion Network & Frozen vanilla backbone
-# BACKBONE_TYPE=VANIL
-# BATCHSIZE=3
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-Fuse-$SUFFIX
-# OUTPUT_NOISE=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
-#     --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
-#     SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#     DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
-#     MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE \
-#     MODEL.E2E_MODE 'rpn_dyhead_tower' MODEL.E2E True >> $OUTPUT_NOISE.txt
+############# Only Fusion Network & Frozen vanilla backbone
+BACKBONE_TYPE=VANIL
+BATCHSIZE=3
+NAME=$MODEL_TYPE-$BACKBONE_TYPE-Fuse-$SUFFIX
+OUTPUT_NOISE=ucf_output/$NAME
+DUMP_FOLDER=EXPS/$NAME
+rm -rf $DUMP_FOLDER
+printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+    --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+    SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+    DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+    MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE \
+    MODEL.E2E_MODE 'rpn_dyhead_tower' MODEL.E2E True >> $OUTPUT_NOISE.txt
 
 
 ############# Only Fusion Network & Frozen vanilla backbone + LR noise 
@@ -241,206 +228,73 @@ CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W
 
 
 
-    
-    
+### LR_TKO
+BACKBONE_TYPE=LR_TKO
+
+BATCHSIZE=3
+NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+OUTPUT_NOISE=ucf_output/$NAME
+DUMP_FOLDER=EXPS/$NAME
+rm -rf $DUMP_FOLDER
+printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+  --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+  SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+  DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+  MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True >> $OUTPUT_NOISE.txt
 
 
 
+########################################## NN
+BACKBONE_TYPE=NN+Norm
+BATCHSIZE=3
+NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+OUTPUT_NOISE=ucf_output/$NAME
+DUMP_FOLDER=EXPS/$NAME
+rm -rf $DUMP_FOLDER
+printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+  --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+  SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+  DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+  MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True >> $OUTPUT_NOISE.txt
 
 
-# ########################################## LR-TKO / LoRA / VPT / Adapters
-#### LoRA
-# BACKBONE_TYPE=LORA
-#### Adapters 
-# BACKBONE_TYPE=ADAPTER
-#### VPT
-# BACKBONE_TYPE=VPT_DEEP
-#### LR_TKO
-# BACKBONE_TYPE=LR_TKO
-
-# BATCHSIZE=3
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
-# OUTPUT_NOISE=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
-#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
-#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
-#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True >> $OUTPUT_NOISE.txt
+########################################## NN + LRTK0
+BACKBONE_TYPE=NN+Norm+LR_TKO
+BATCHSIZE=3
+NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
+OUTPUT_NOISE=ucf_output/$NAME
+DUMP_FOLDER=EXPS/$NAME
+rm -rf $DUMP_FOLDER
+printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
+CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
+  --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
+  SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+  DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
+  MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True >> $OUTPUT_NOISE.txt
 
 
-
-# ########################################## NN
-# BACKBONE_TYPE=NN+Norm
-# BATCHSIZE=3
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
-# OUTPUT_NOISE=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
-#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
-#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
-#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True >> $OUTPUT_NOISE.txt
+############# NN + LRTK0 + LR Noise 
+TRAIN_FN=multi_scale_train
+DATALOADER=FlickrDataset_MULTI_SCALE
+TEST_DATALOADER=COCODataset_Perturb
+TECHNIQUE=GeneralizedVLRCNN_PROPOSE
+SUBSET=subset3
 
 
-# ########################################## NN + LRTK0
-# BACKBONE_TYPE=NN+Norm+LR_TKO
-# BATCHSIZE=3
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
-# OUTPUT_NOISE=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-# printf "\n\n #### $SUFFIX \n\n" >> $OUTPUT_NOISE.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
-#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
-#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
-#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True >> $OUTPUT_NOISE.txt
-
-
-# ############# NN + LRTK0 + LR Noise 
-# TRAIN_FN=multi_scale_train
-# DATALOADER=FlickrDataset_MULTI_SCALE
-# TEST_DATALOADER=COCODataset_Perturb
-# TECHNIQUE=GeneralizedVLRCNN_PROPOSE
-# SUBSET=subset3
-
-
-# BACKBONE_TYPE=NN+Norm+LR_TKO
-# BATCHSIZE=3
-# LOSS_MODE="low-res"
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX-$LOSS_MODE
-# OUTPUT_NOISE=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-# printf "\n\n #### $SUFFIX $LOSS_MODE \n\n" >> $OUTPUT_NOISE.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG \
-#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN --subset $SUBSET  \
-#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#   DATASETS.TRAIN_DATALOADER $DATALOADER DATASETS.TEST_DATALOADER $TEST_DATALOADER DATASETS.DATALOADER_MODE $LOSS_MODE \
-#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True >> $OUTPUT_NOISE.txt
-
-
-
-
-# # ########################################## FAN 
-# https://arxiv.org/pdf/2204.12451    
-##### Entire Vision Backbone E2E 
-# BACKBONE_TYPE=FAN_E2E
-# BATCHSIZE=6
-###### Entire MLP + Channel Attention 
-# BACKBONE_TYPE=FAN_MLP
-# BATCHSIZE=6
-
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
-# OUTPUT=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-# printf "\n\n #### $SUFFIX :: $BACKBONE_TYPE $DUMP_FOLDER \n\n" >> $OUTPUT.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG \
-#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
-#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
-#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True >> $OUTPUT.txt
-
-
-
-# # # ########################################## REGISTER   
-# # https://arxiv.org/pdf/2309.16588
-# BACKBONE_TYPE=REGISTER_E2E
-# BATCHSIZE=6
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX-L2 
-# OUTPUT=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-# printf "\n\n #### $SUFFIX :: $BACKBONE_TYPE $DUMP_FOLDER \n\n" >> $OUTPUT.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG \
-#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
-#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
-#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True \
-#   MODEL.DYHEAD.NUM_CLASSES 10 MODEL.DYHEAD.FUSE_CONFIG.USE_CLASSIFICATION_LOSS True >> $OUTPUT.txt
-
-
-
-
-
-
-
-
-# # ########################################## MINT (Only Layer Norm)  
-# ###### Mint :: 
-# BACKBONE_TYPE=MINT
-# BATCHSIZE=15
-# TECHNIQUE=GeneralizedVLRCNN_VAR
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
-# OUTPUT=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-# printf "\n\n #### $SUFFIX :: $BACKBONE_TYPE $DUMP_FOLDER \n\n" >> $OUTPUT.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
-#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
-#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
-#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True >> $OUTPUT.txt
-
-
-
-
-
-
-# ########################################## RobustSAM
-
-BATCHSIZE=4
-BACKBONE_TYPE=RobustSAM
-TECHNIQUE=GeneralizedVLRCNN_RobustSAM
-N_BR=3
-
-##### Doesnt influence box predictions 
-# MODE="aggregate"
-# SUFFIX=AG-$SUFFIX-$N_BR
-# MODE="aggregate_all"
-# SUFFIX=AG-ALL-$SUFFIX-$N_BR
-
-# MODE="hidden"
-# SUFFIX=HD-$SUFFIX-$N_BR 
-
-# MODE="hidden_all"
-# SUFFIX=HD-ALL-$SUFFIX-$N_BR 
-
-# NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX
-# OUTPUT=ucf_output/$NAME
-# DUMP_FOLDER=EXPS/$NAME
-# rm -rf $DUMP_FOLDER
-
-
-# printf "\n\n #### $SUFFIX :: $BACKBONE_TYPE $DUMP_FOLDER \n\n" >> $OUTPUT.txt
-# CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG --no-display \
-#   --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN \
-#   SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
-#   DATASETS.TRAIN $Dataset_TRAIN DATASETS.TEST $Dataset_TEST  \
-#   MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True \
-#   MODEL.RPN.NO_FUSE $MODE MODEL.RPN.FREEZE False DATASETS.REPLICA_END True DATASETS.N_BR $N_BR >> $OUTPUT.txt
-
-
-
-
-
-
-
-
-
-
-rsync -a ucf_output/* ucf2:~/robustness_object_detection/GLIP/ucf_output/
-# rsync -a ucf0:~/robustness_object_detection/GLIP/ucf_output/* ~/robustness_object_detection/GLIP/ucf_output/
-
-
-
-# cd ~/robustness_object_detection/GLIP/
-# sbatch Script/train_baseline.sh
+BACKBONE_TYPE=NN+Norm+LR_TKO
+BATCHSIZE=3
+LOSS_MODE="low-res"
+NAME=$MODEL_TYPE-$BACKBONE_TYPE-$SUFFIX-$LOSS_MODE
+OUTPUT_NOISE=ucf_output/$NAME
+DUMP_FOLDER=EXPS/$NAME
+rm -rf $DUMP_FOLDER
+printf "\n\n #### $SUFFIX $LOSS_MODE \n\n" >> $OUTPUT_NOISE.txt
+CUDA_VISIBLE_DEVICES=0,1 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python python -W ignore -m torch.distributed.launch --nnodes 1 --nproc_per_node=$NUM_GPU --master_port=$PORT tools/train_net_proposed.py --config-file $CONFIG \
+  --override_output_dir $DUMP_FOLDER --train_fn=$TRAIN_FN --subset $SUBSET  \
+  SOLVER.IMS_PER_BATCH $((BATCHSIZE*NUM_GPU)) TEST.IMS_PER_BATCH $NUM_GPU TEST.DURING_TRAINING True MODEL.WEIGHT $WT TEST.EVAL_TASK detection MODEL.DYHEAD.SCORE_AGG "MEAN" MODEL.DYHEAD.FUSE_CONFIG.MLM_LOSS False \
+  DATASETS.TRAIN_DATALOADER $DATALOADER DATASETS.TEST_DATALOADER $TEST_DATALOADER DATASETS.DATALOADER_MODE $LOSS_MODE \
+  MODEL.NO_NORM True MODEL.META_ARCHITECTURE $TECHNIQUE MODEL.BACKBONE_TYPE $BACKBONE_TYPE DATALOADER.NUM_WORKERS 2 SOLVER.USE_AMP True >> $OUTPUT_NOISE.txt
 
 

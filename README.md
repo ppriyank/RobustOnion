@@ -19,15 +19,8 @@ Feel free to raise a GitHub issue if something is not clear. If you have your da
 
 ## Model Code for RobustOnion (NN+TK0)
 
-** CODE UPLOAD COMING SOON (Before Conference in Sept) ** 
-
-<br> <p align="left">💡 Highlights</p>
-</div>
-✨ <br/>
-</div>
-
-
-
+All the training code is [here](GLIP/Script/train_baseline.sh)
+The code needs some understanding of maskrcnn benchmark. We request readers to be able to first run vanilla coco eval before training the models.
 
 
 
