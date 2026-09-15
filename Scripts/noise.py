@@ -293,50 +293,6 @@ if atmospheric_turbulence:
 
 
 
-def fft(channel):
-    fft = np.fft.fft2(channel)
-    f_transform_shifted = np.fft.fftshift(fft)
-    magnitude_spectrum = np.abs(f_transform_shifted) + 1
-    magnitude_spectrum = np.log1p(magnitude_spectrum)
-    magnitude_spectrum = (magnitude_spectrum - magnitude_spectrum.min()) / (magnitude_spectrum.max() - magnitude_spectrum.min())
-    magnitude_spectrum *= 255.0 
-    return magnitude_spectrum
-
-if low_res_fourier:
-    start_time = time.time()
-    for file in data['images']:
-        path = os.path.join(Root, intermediate, file['file_name'])
-        image = Image.open(path)
-        # image= image.convert("L")
-        H,W  = image.size
-
-        channels = image.split() 
-        result_array = np.zeros_like(image)
-        for i, channel in enumerate(channels):
-            result_array[..., i] = fft(channel)
-        result_image = Image.fromarray(result_array)
-        result_image.save("temp-OG.png")
-
-        image = image.resize((H // 4, W // 4), Image.BICUBIC)
-        image = image.resize((H, W ), Image.BICUBIC)
-
-        channels = image.split() 
-        result_array = np.zeros_like(image)
-        for i, channel in enumerate(channels):
-            result_array[..., i] = fft(channel)
-        result_image = Image.fromarray(result_array)
-        result_image.save("temp-FT.png")
-
-
-        
-        
-        
-        
-        
-        
-        
-        quit()
-
 
 end_time = time.time()
 elapsed_time = end_time - start_time

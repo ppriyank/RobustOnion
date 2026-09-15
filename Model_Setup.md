@@ -1,6 +1,5 @@
-# Setup 
 
-## Models 
+# Models 
 
 ### GLIP 
 
@@ -143,4 +142,27 @@ wget  -P projects/GLEE/clip_vit_base_patch32/ https://huggingface.co/openai/clip
 
 wget  -P Weights/ https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_large_patch4_window12_384_22k.pth
 ```
+
+
+Download weights in GLEE/Weights
+
+```
+GLEE/Weights/converted_EVA02_m38m_psz14to16.pth
+GLEE/Weights/eva02_L_pt_m38m_p14to16.pt
+GLEE/Weights/GLEE_Lite_joint.pth
+GLEE/Weights/GLEE_Lite_pretrain.pth
+GLEE/Weights/GLEE_Lite_scaleup.pth
+GLEE/Weights/GLEE_Plus_joint.pth
+GLEE/Weights/GLEE_Plus_pretrain.pth
+GLEE/Weights/GLEE_Plus_scaleup.pth
+GLEE/Weights/GLEE_Pro_joint.pth
+GLEE/Weights/GLEE_Pro_pretrain.pth
+GLEE/Weights/GLEE_Pro_scaleup.pth
+GLEE/Weights/swin_large_patch4_window12_384_22k.pth
+GLEE/Weights/swin_tiny_patch4_window7_224.pth
+```
+
+
+
+
 

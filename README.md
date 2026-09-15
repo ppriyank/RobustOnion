@@ -34,14 +34,16 @@ If you have your datasets set up, feel free to give it a try or verify performan
 This Work (Paper 2): Robust onion: Peeling Open Vocab Object Detectors Under Noise 
 
 ```bibtex
-@misc{robust_onion,
-      title           ={Robust Onion: Peeling Open Vocab Object Detectors Under Noise},
-      author          ={Priyank Pathak and Mukilan Karuppasamy and Aaditya Baranwal and Shruti Vyas, and Yogesh S Rawat},
-      booktitle       ={The 19th European Conference on Computer Vision (ECCV)},
-      year            ={2026},
-      month           ={September},
-      url             ={},
-      }
+@InProceedings{robust_onion,
+    author="Pathak, Priyank and Karuppasamy, Mukilan and Baranwal, Aaditya and Vyas, Shruti and Rawat, Yogesh S.",
+    title="Robust Onion: Peeling Open Vocab Object Detectors Under Noise",
+    booktitle="Computer Vision -- ECCV 2026",
+    year="2026",
+    publisher="Springer Nature Switzerland",
+    address="Cham",
+    pages="353--373",
+    isbn="978-3-032-37095-2"
+}      
 ```
 
 
