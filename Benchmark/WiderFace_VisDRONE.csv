@@ -1,0 +1,5 @@
+Method_GLIP_T,Trainable_Parameters_M,Flickr30k_to_WiderFace_AP,Flickr30k_to_WiderFace_AP50,UAVDT_to_VisDRONE_AP,UAVDT_to_VisDRONE_AP50
+Zero-Shot,,11.98,26.49,20.44,27.09
+E2E,231.76,10.86,24.69,18.68,30.56
+Fuse,91.85,10.55,24.92,20.07,29.89
+NN & TK0,2.41,13.23,28.71,19.34,30.97

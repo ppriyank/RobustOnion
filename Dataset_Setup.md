@@ -1,19 +1,4 @@
-# Robustness for Object Detection 
-
-## Setup 
-- Installation Instrucitons & Dataset Setup for all models are [Model & Dataset](Scripts/Readme.md). Three Models used in the code : GLIP (all ablation and analysis), MMGDINO & GLEE
-
-- Please check the official repository to download the pretrained weights 
-Deeplearning Based Rain and Snow (and Kernel based Motion Blur ) :  [Rain-Snow-Motion Blur](https://github.com/hgupta01/Weather_Effect_Generator/tree/main) / [Code](Weather_Simulation/)
-
-
-- Kernelized Turbulence :  [Kernelized Turbulence](https://github.com/Riponcs/TurbulenceSimulatorPython) / [Code](TurbulenceSimulatorPython/)
-
-- Rest all the aumgnetaion can be found in [Scripts/noise.py](Scripts/noise.py) 
-
-
-
-## DATASET 
+# DATASET 
 
 Flicker and COCO, LVIS and ODWIN needs to be downloaded from office website. 
 Flicker30K is used for training and COCO for all evalaution.

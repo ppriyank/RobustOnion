@@ -3,18 +3,20 @@
 ## Important Note: 
 This Paper is a part of my ongoing research, and hence, only the selective code is available. If you have GLIP setup (i.e., maskrcnn_benchmark library, congratulations!!), please upload the above files to your library to enable training GLIP via freezing it entirely, TK0, and NN.
 
-The library cannot, in general, handle an external dataset; the custom dataset classes I wrote are proprietary and will be available in the future (may be 6 months?). Feel free to raise a GitHub issue if it's not by then. If you have your datasets set up, feel free to give it a try or verify performance on Flicker training and COCO evaluation to verify the numbers reported in the paper. 
+Feel free to raise a GitHub issue if something is not clear. 
+If you have your datasets set up, feel free to give it a try or verify performance on Flicker training and COCO evaluation to verify the numbers reported in the paper. 
 
 
-### Setup 
-- [Setup](SETUP.md) instructions for all models, dataset noises (augmentation)
-- [Setup](SETUP.md) instructions for settig up new datasets (converting arbitrary dataset into coco annotations) and adding it to the model. 
+## Setup 
+- [Models](Model_Setup.md) Setup instructions for transformer based models. 
+- [Datasets (& New Datsets)](Dataset_Setup.md) Setup instructions for custom datatsets and datasets used in the paper. Convert arbitrary dataset into coco annotations and add it to the model. 
 - [Benchmark](Benchmark/) Benchmark csvs used in the paper.
+- [Noises](Scripts/noise.py) Simulate noises on images 
 
 
 
 
-### Model Code for RobustOnion (NN+TK0)
+## Model Code for RobustOnion (NN+TK0)
 
 ** CODE UPLOAD COMING SOON (Before Conference in Sept) ** 
 
