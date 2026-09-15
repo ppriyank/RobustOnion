@@ -1,7 +1,9 @@
-# 🚀 RobustOnion (ECCV-26 🎉)<br> [webpage](https://ucf-crcv.github.io/RobustOnion/) | [paper]() | [Individual results](MetaData/Results/) | [WAR-SAR Ranking](MetaData/WAR_SAR_Ranking)  
+# 🚀 RobustOnion (ECCV-26 🎉)<br> [Project](https://ucf-crcv.github.io/RobustOnion/) | [Paper](https://eccv.ecva.net/virtual/2026/poster/5437) | [Results](Benchmark/)  
 
 ## Important Note: 
-This Paper is a part of my ongoing research, and hence, only the selective code is available. If you have GLIP setup (i.e., maskrcnn_benchmark library, congratulations!!), please upload the above files to your library to enable training GLIP via freezing it entirely, TK0, and NN.
+This Paper is a part of my ongoing research, and hence, only the selective code is available. First Please setup GLIP / MMGDINO / GLEE setup (from their original Github); GLIP uses "maskrcnn_benchmark", 
+
+(i.e., maskrcnn_benchmark library, congratulations!!), please upload the above files to your library to enable training GLIP via freezing it entirely, TK0, and NN.
 
 Feel free to raise a GitHub issue if something is not clear. 
 If you have your datasets set up, feel free to give it a try or verify performance on Flicker training and COCO evaluation to verify the numbers reported in the paper. 
