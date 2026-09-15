@@ -160,6 +160,7 @@ GLEE/Weights/GLEE_Pro_pretrain.pth
 GLEE/Weights/GLEE_Pro_scaleup.pth
 GLEE/Weights/swin_large_patch4_window12_384_22k.pth
 GLEE/Weights/swin_tiny_patch4_window7_224.pth
+GLEE/projects/GLEE/clip_vit_base_patch32/pytorch_model.bin
 ```
 
 
